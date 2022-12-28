@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS TodoApp</title>
+    <title>JS Leaning</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/reset.css" /> -->
   </head>
-  <body></body>
+  <body>
+    <h1>ToDo リスト</h1>
+    <form action="#">
+      <p>
+        <input type="radio" name="filter" value="すべて" /> すべて
+        <input type="radio" name="filter" value="作業中" /> 作業中
+        <input type="radio" name="filter" value="完了" /> 完了
+      </p>
+    </form>
+    <p id="task"></p>
+
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>名前</th>
+          <th>状態</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="playerList"></tbody>
+      <!-- ここに配列の中身を表示させる -->
+    </table>
+
+    <!-- <div id="getData"></div>
+    <div id="getData2"></div> -->
+
+    <h2>新規タスクの追加</h2>
+    <form id="form" action="#" method="post">
+      <input id="text" type="text" placeholder="テキストを入力" />
+      <button id="addButton" type="submit">追加</button>
+      <!-- <input id="addButton" type="button" value="追加" /> -->
+    </form>
+
+    <script src="main.js"></script>
+  </body>
 </html>
