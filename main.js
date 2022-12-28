@@ -1,56 +1,41 @@
-const text = document.getElementById("text"),
-  task = document.getElementById("task"),
+const text = document.getElementById("text"), // 入力されたテキスト
+  task = document.getElementById("task"), // テキストの反映先
   addButton = document.getElementById("addButton"),
-  form = document.getElementById("form");
-
+  form = document.getElementById("form"),
+  taskList = document.getElementById("taskList");
 const addButtonClick = (el) => {
   return (task.innerText = el.value);
 };
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   addButtonClick(text);
-});
-// addButton.addEventListener(
-//   "click",
-//   () => {
-//     addButtonClick(text);
-//   },
-//   false
-// );
+  console.log(text.value);
 
-const players = [
-  {
-    No: "1",
-    grade: "二冠",
-    name: "藤井",
-    age: 19,
-  },
-  {
-    No: "2",
-    grade: "竜王",
-    name: "豊島",
-    age: 31,
-  },
-];
+  const taskInfo = [
+    {
+      id: "0",
+      name: text.value,
+      status: "作業中",
+      dlt: "削除",
+    },
+  ];
 
-const playerList = document.getElementById("playerList");
-
-players.forEach((player) => {
-  // 配列の中のオブジェクトの数だけ処理を繰り返す
-  const tr = document.createElement("tr");
-  playerList.appendChild(tr); // 表の中に８個の「tr」（行）ができる
-  // 1行の中を生成
-  const objArray = Object.entries(player); // オブジェクトを配列に
-  objArray.forEach((arr) => {
-    // No, name, age, gradeの4回繰り返す
-    const td = document.createElement("td");
-    td.textContent = arr[1]; // arr[1]はvalueの部分
-    tr.appendChild(td);
+  taskInfo.forEach((todo) => {
+    // 配列の中のオブジェクトの数だけ処理を繰り返す
+    const tr = document.createElement("tr");
+    taskList.appendChild(tr);
+    const objArray = Object.entries(todo); // オブジェクトを配列に変換
+    console.log(objArray);
+    objArray.forEach((arr) => {
+      const td = document.createElement("td");
+      td.textContent = arr[1]; // arr[1]はvalueの部分
+      tr.appendChild(td);
+    });
   });
 });
 
-// const array = [{ id: "ID", name: "名前", status: "状態" }];
-// const array2 = [{ id: 0, name: "タスク", status: "作業中" }];
+//////////
+// const array = [{ id: "ID", name: "名前", status: "状態" }, { id: 0, name: "タスク", status: "作業中" }];
 
 // // 配列の長さの文だけループを回す
 // for (let i = 0; i < array.length; i++) {
@@ -61,13 +46,4 @@ players.forEach((player) => {
 //   getData.appendChild(arrayName);
 //   const arrayStatus = document.createTextNode(array[i].status);
 //   getData.appendChild(arrayStatus);
-// }
-// for (let i = 0; i < array2.length; i++) {
-//   const getData2 = document.getElementById("getData2");
-//   const arrayId = document.createTextNode(array2[i].id);
-//   getData2.appendChild(arrayId);
-//   const arrayName = document.createTextNode(array2[i].name);
-//   getData2.appendChild(arrayName);
-//   const arrayStatus = document.createTextNode(array2[i].status);
-//   getData2.appendChild(arrayStatus);
 // }
