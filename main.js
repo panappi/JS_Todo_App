@@ -1,41 +1,42 @@
 const text = document.getElementById("text"), // 入力されたテキスト
-  task = document.getElementById("task"), // テキストの反映先
+  // task = document.getElementById("task"), // テキストの反映先
   addButton = document.getElementById("addButton"),
   form = document.getElementById("form"),
-  taskList = document.getElementById("taskList");
-const addButtonClick = (el) => {
-  return (task.innerText = el.value);
-};
+  taskList = document.getElementById("taskList"),
+  buttonStatus = document.getElementById("buttonStatus");
 let numId = 0;
+
+// const addButtonClick = (el) => {
+//   return (task.innerText = el.value);
+// };
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   // addButtonClick(text);
-  console.log(text.value);
 
   const trTag = document.createElement("tr");
   taskList.appendChild(trTag);
   // IDをtdに追加
   const tdTagId = document.createElement("td");
   tdTagId.textContent = numId++;
-  // console.log(tdTagId);
   trTag.appendChild(tdTagId);
   // 名前をtdに追加
   const tdTagName = document.createElement("td");
   tdTagName.textContent = text.value;
-  // console.log(tdTagName);
   trTag.appendChild(tdTagName);
   // 作業中ボタンをtdに追加
   const tdTagStatus = document.createElement("td");
-  const buttonStatus = document.createElement("button");
-  buttonStatus.innerHTML = "作業中";
-  // console.log(buttonStatus);
-  tdTagStatus.appendChild(buttonStatus);
+  const buttonTagStatus = document.createElement("button");
+  buttonTagStatus.setAttribute("id", "buttonStatus");
+  buttonTagStatus.innerHTML = "作業中";
+  tdTagStatus.appendChild(buttonTagStatus);
   trTag.appendChild(tdTagStatus);
   // 削除ボタンをtdに追加
   const tdTagDelete = document.createElement("td");
-  const buttonDelete = document.createElement("button");
-  buttonDelete.innerHTML = "削除";
-  tdTagDelete.appendChild(buttonDelete);
+  const buttonTagDelete = document.createElement("button");
+  buttonTagDelete.setAttribute("id", "buttonDelete");
+  buttonTagDelete.innerHTML = "削除";
+  tdTagDelete.appendChild(buttonTagDelete);
   trTag.appendChild(tdTagDelete);
 
   // const taskInfo = [
@@ -59,7 +60,24 @@ form.addEventListener("submit", (e) => {
   //     tr.appendChild(td);
   //   });
   // });
+
+  buttonTagStatus.addEventListener(
+    "click",
+    () => {
+      toggleStatus(buttonTagStatus);
+    },
+    false
+  );
 });
+
+const toggleStatus = (el) => {
+  const chooseButton = el.closest("button");
+  if (chooseButton.innerText === "作業中") {
+    chooseButton.innerText = "完了";
+  } else {
+    chooseButton.innerText = "作業中";
+  }
+};
 
 //////////
 // const array = [{ id: "ID", name: "名前", status: "状態" }, { id: 0, name: "タスク", status: "作業中" }];
