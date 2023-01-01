@@ -1,81 +1,73 @@
-const text = document.getElementById("text"), // 入力されたテキスト
-  // task = document.getElementById("task"), // テキストの反映先
-  addButton = document.getElementById("addButton"),
-  form = document.getElementById("form"),
-  taskList = document.getElementById("taskList");
+const text = document.getElementById("text"); // 入力されたテキスト
+const addButton = document.getElementById("addButton");
+const form = document.getElementById("form");
+const taskList = document.getElementById("taskList");
 let numId = 0;
+let taskArray = [
+  // {
+  //   id: 0,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
+  // {
+  //   id: 1,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
+  // {
+  //   id: 2,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
+];
 
-// const addButtonClick = (el) => {
-//   return (task.innerText = el.value);
-// };
+const displayTaskArray = (taskArray) => {
+  // tbodyを初期化
+  taskList.innerHTML = "";
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  // addButtonClick(text);
+  taskArray.forEach((task) => {
+    // 配列の中のオブジェクトの数だけ処理を繰り返す
+    const tr = document.createElement("tr");
+    taskList.appendChild(tr);
+    const objArray = Object.entries(task); // オブジェクトを配列に変換
+    // console.log(objArray);
+    objArray.forEach((arr) => {
+      const td = document.createElement("td");
+      const buttonTagStatus = document.createElement("button");
+      const buttonTagDelete = document.createElement("button");
+      if (arr[0] === "status") {
+        buttonTagStatus.innerHTML = "作業中";
+        td.appendChild(buttonTagStatus);
+        tr.appendChild(td);
+      } else if (arr[0] === "delete") {
+        buttonTagDelete.innerHTML = "削除";
+        td.appendChild(buttonTagDelete);
+        tr.appendChild(td);
+      } else {
+        td.textContent = arr[1]; // arr[1]はvalueの部分
+        tr.appendChild(td);
+      }
 
-  const trTag = document.createElement("tr");
-  taskList.appendChild(trTag);
-  // IDをtdに追加
-  const tdTagId = document.createElement("td");
-  tdTagId.textContent = numId++;
-  trTag.appendChild(tdTagId);
-  // 名前をtdに追加
-  const tdTagName = document.createElement("td");
-  tdTagName.textContent = text.value;
-  trTag.appendChild(tdTagName);
-  // 作業中ボタンをtdに追加
-  const tdTagStatus = document.createElement("td");
-  const buttonTagStatus = document.createElement("button");
-  buttonTagStatus.setAttribute("id", "buttonStatus");
-  buttonTagStatus.innerHTML = "作業中";
-  tdTagStatus.appendChild(buttonTagStatus);
-  trTag.appendChild(tdTagStatus);
-  // 削除ボタンをtdに追加
-  const tdTagDelete = document.createElement("td");
-  const buttonTagDelete = document.createElement("button");
-  buttonTagDelete.setAttribute("id", "buttonDelete");
-  buttonTagDelete.innerHTML = "削除";
-  tdTagDelete.appendChild(buttonTagDelete);
-  trTag.appendChild(tdTagDelete);
+      buttonTagStatus.addEventListener(
+        "click",
+        () => {
+          toggleStatus(buttonTagStatus);
+        },
+        false
+      );
 
-  // const taskInfo = [
-  //   {
-  //     id: "0",
-  //     name: text.value,
-  //     status: "作業中",
-  //     dlt: "削除",
-  //   },
-  // ];
+      buttonTagDelete.addEventListener(
+        "click",
+        () => {
+          deleteTask(task.id);
+        },
+        false
+      );
+    });
+  });
+};
 
-  // taskInfo.forEach((todo) => {
-  //   // 配列の中のオブジェクトの数だけ処理を繰り返す
-  //   const tr = document.createElement("tr");
-  //   taskList.appendChild(tr);
-  //   const objArray = Object.entries(todo); // オブジェクトを配列に変換
-  //   console.log(objArray);
-  //   objArray.forEach((arr) => {
-  //     const td = document.createElement("td");
-  //     td.textContent = arr[1]; // arr[1]はvalueの部分
-  //     tr.appendChild(td);
-  //   });
-  // });
-
-  buttonTagStatus.addEventListener(
-    "click",
-    () => {
-      toggleStatus(buttonTagStatus);
-    },
-    false
-  );
-
-  buttonTagDelete.addEventListener(
-    "click",
-    () => {
-      deleteTask(buttonTagDelete);
-    },
-    false
-  );
-});
+displayTaskArray(taskArray);
 
 const toggleStatus = (el) => {
   const chooseButton = el.closest("button");
@@ -86,21 +78,28 @@ const toggleStatus = (el) => {
   }
 };
 
-const deleteTask = (el) => {
-  const chooseTask = el.closest("tr");
-  taskList.removeChild(chooseTask);
+const deleteTask = (id) => {
+  taskArray = taskArray
+    .filter((task) => task.id !== id)
+    .map((task, index) => {
+      return {
+        ...task,
+        id: index,
+      };
+    });
+
+  displayTaskArray(taskArray);
 };
 
-//////////
-// const array = [{ id: "ID", name: "名前", status: "状態" }, { id: 0, name: "タスク", status: "作業中" }];
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-// // 配列の長さの文だけループを回す
-// for (let i = 0; i < array.length; i++) {
-//   const getData = document.getElementById("getData");
-//   const arrayId = document.createTextNode(array[i].id);
-//   getData.appendChild(arrayId);
-//   const arrayName = document.createTextNode(array[i].name);
-//   getData.appendChild(arrayName);
-//   const arrayStatus = document.createTextNode(array[i].status);
-//   getData.appendChild(arrayStatus);
-// }
+  taskArray.push({
+    id: taskArray.length,
+    name: text.value,
+    status: "作業中",
+    delete: "削除",
+  });
+  displayTaskArray(taskArray);
+  // console.log(taskArray);
+});
