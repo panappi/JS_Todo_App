@@ -2,8 +2,7 @@ const text = document.getElementById("text"), // 入力されたテキスト
   // task = document.getElementById("task"), // テキストの反映先
   addButton = document.getElementById("addButton"),
   form = document.getElementById("form"),
-  taskList = document.getElementById("taskList"),
-  buttonStatus = document.getElementById("buttonStatus");
+  taskList = document.getElementById("taskList");
 let numId = 0;
 
 // const addButtonClick = (el) => {
@@ -68,6 +67,14 @@ form.addEventListener("submit", (e) => {
     },
     false
   );
+
+  buttonTagDelete.addEventListener(
+    "click",
+    () => {
+      deleteTask(buttonTagDelete);
+    },
+    false
+  );
 });
 
 const toggleStatus = (el) => {
@@ -77,6 +84,11 @@ const toggleStatus = (el) => {
   } else {
     chooseButton.innerText = "作業中";
   }
+};
+
+const deleteTask = (el) => {
+  const chooseTask = el.closest("tr");
+  taskList.removeChild(chooseTask);
 };
 
 //////////
