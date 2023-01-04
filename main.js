@@ -4,21 +4,21 @@ const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 const radioForm = document.getElementById("radioForm");
 let taskArray = [
-  {
-    id: 0,
-    name: "ほげ",
-    status: "作業中",
-  },
-  {
-    id: 1,
-    name: "ほげ",
-    status: "作業中",
-  },
-  {
-    id: 2,
-    name: "ほげ",
-    status: "作業中",
-  },
+  // {
+  //   id: 0,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
+  // {
+  //   id: 1,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
+  // {
+  //   id: 2,
+  //   name: "ほげ",
+  //   status: "作業中",
+  // },
 ];
 
 const displayTaskArray = (taskArray) => {
@@ -92,14 +92,6 @@ const toggleStatus = (id) => {
   });
   displayTaskArray(taskArray);
 };
-// const toggleStatus = (buttonTagStatus) => {
-//   const chooseButton = buttonTagStatus.closest("button");
-//   if (chooseButton.innerText === "作業中") {
-//     chooseButton.innerText = "完了";
-//   } else {
-//     chooseButton.innerText = "作業中";
-//   }
-// };
 
 const deleteTask = (id) => {
   taskArray = taskArray
@@ -122,7 +114,6 @@ const filterCheck = () => {
   for (let i = 0; i < document.radios.filter.length; i++) {
     if (document.radios.filter[i].checked) {
       flag = true;
-      console.log(document.radios.filter[i].value);
       filterValue = document.radios.filter[i].value;
     }
   }
@@ -135,11 +126,9 @@ const filterTask = () => {
   let filterTaskArray = [];
   if (filterValue === "すべて") {
     displayTaskArray(taskArray);
-    console.log(taskArray);
   } else {
     filterTaskArray = taskArray.filter((task) => task.status == filterValue);
     displayTaskArray(filterTaskArray);
-    console.log(filterTaskArray);
   }
 };
 
@@ -148,7 +137,6 @@ form.addEventListener("submit", (e) => {
   addTaskArray(taskArray);
   displayTaskArray(taskArray);
   formReset(form);
-  // console.log(taskArray);
 });
 
 radioForm.addEventListener("click", (e) => {
