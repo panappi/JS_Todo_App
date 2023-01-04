@@ -1,8 +1,7 @@
+const form = document.getElementById("form");
 const text = document.getElementById("text"); // 入力されたテキスト
 const addButton = document.getElementById("addButton");
-const form = document.getElementById("form");
 const taskList = document.getElementById("taskList");
-let numId = 0;
 let taskArray = [
   // {
   //   id: 0,
@@ -69,8 +68,17 @@ const displayTaskArray = (taskArray) => {
 
 displayTaskArray(taskArray);
 
-const toggleStatus = (el) => {
-  const chooseButton = el.closest("button");
+const addTaskArray = (taskArray) => {
+  taskArray.push({
+    id: taskArray.length,
+    name: text.value,
+    status: "作業中",
+    delete: "削除",
+  });
+};
+
+const toggleStatus = (buttonTagStatus) => {
+  const chooseButton = buttonTagStatus.closest("button");
   if (chooseButton.innerText === "作業中") {
     chooseButton.innerText = "完了";
   } else {
@@ -91,15 +99,12 @@ const deleteTask = (id) => {
   displayTaskArray(taskArray);
 };
 
+const formReset = (form) => form.reset();
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
-  taskArray.push({
-    id: taskArray.length,
-    name: text.value,
-    status: "作業中",
-    delete: "削除",
-  });
+  addTaskArray(taskArray);
   displayTaskArray(taskArray);
+  formReset(form);
   // console.log(taskArray);
 });
