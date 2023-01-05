@@ -1,24 +1,29 @@
-const form = document.getElementById("form");
+const ALL = "すべて";
+const DOING = "作業中";
+const DONE = "完了";
+const REMOVE = "削除";
+
+const radioForm = document.getElementById("radioForm");
+const textForm = document.getElementById("textForm");
 const text = document.getElementById("text"); // 入力されたテキスト
 const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
-const radioForm = document.getElementById("radioForm");
 let taskArray = [
-  // {
-  //   id: 0,
-  //   name: "ほげ",
-  //   status: "作業中",
-  // },
-  // {
-  //   id: 1,
-  //   name: "ほげ",
-  //   status: "作業中",
-  // },
-  // {
-  //   id: 2,
-  //   name: "ほげ",
-  //   status: "作業中",
-  // },
+  {
+    id: 0,
+    name: "ほげ",
+    status: DOING,
+  },
+  {
+    id: 1,
+    name: "ほげ",
+    status: DOING,
+  },
+  {
+    id: 2,
+    name: "ほげ",
+    status: DOING,
+  },
 ];
 
 const displayTaskArray = (taskArray) => {
@@ -31,7 +36,6 @@ const displayTaskArray = (taskArray) => {
     const tr = document.createElement("tr");
     taskList.appendChild(tr);
     const objArray = Object.entries(task); // オブジェクトを配列に変換
-    // console.log(objArray);
     objArray.forEach((arr) => {
       const td = document.createElement("td");
       const buttonTagStatus = document.createElement("button");
@@ -41,7 +45,7 @@ const displayTaskArray = (taskArray) => {
         td.appendChild(buttonTagStatus);
         tr.appendChild(td);
       } else if (arr[0] === "delete") {
-        buttonTagDelete.innerHTML = "削除";
+        buttonTagDelete.innerHTML = REMOVE;
         td.appendChild(buttonTagDelete);
         tr.appendChild(td);
       } else {
@@ -49,21 +53,13 @@ const displayTaskArray = (taskArray) => {
         tr.appendChild(td);
       }
 
-      buttonTagStatus.addEventListener(
-        "click",
-        () => {
-          toggleStatus(task.id);
-        },
-        false
-      );
+      buttonTagStatus.addEventListener("click", () => {
+        toggleStatus(task.id);
+      });
 
-      buttonTagDelete.addEventListener(
-        "click",
-        () => {
-          deleteTask(task.id);
-        },
-        false
-      );
+      buttonTagDelete.addEventListener("click", () => {
+        deleteTask(task.id);
+      });
     });
   });
 };
@@ -74,8 +70,8 @@ const addTaskArray = (taskArray) => {
   taskArray.push({
     id: taskArray.length,
     name: text.value,
-    status: "作業中",
-    delete: "削除",
+    status: DOING,
+    delete: REMOVE,
   });
 };
 
@@ -84,11 +80,10 @@ const toggleStatus = (id) => {
     if (task.id === id) {
       return {
         ...task,
-        status: task.status === "作業中" ? "完了" : "作業中",
+        status: task.status === DOING ? DONE : DOING,
       };
-    } else {
-      return task;
     }
+    return task;
   });
   displayTaskArray(taskArray);
 };
@@ -102,29 +97,24 @@ const deleteTask = (id) => {
         id: index,
       };
     });
-
   displayTaskArray(taskArray);
 };
 
 const formReset = (form) => form.reset();
 
-let filterValue = "";
+let filterValue = null;
 const filterCheck = () => {
-  let flag = false; // 選択されているか否かを判定するフラグ
   for (let i = 0; i < document.radios.filter.length; i++) {
     if (document.radios.filter[i].checked) {
       flag = true;
       filterValue = document.radios.filter[i].value;
     }
   }
-  if (!flag) {
-    filterValue = "すべて";
-  }
 };
 
 const filterTask = () => {
   let filterTaskArray = [];
-  if (filterValue === "すべて") {
+  if (filterValue === ALL) {
     displayTaskArray(taskArray);
   } else {
     filterTaskArray = taskArray.filter((task) => task.status == filterValue);
@@ -132,11 +122,11 @@ const filterTask = () => {
   }
 };
 
-form.addEventListener("submit", (e) => {
+textForm.addEventListener("submit", (e) => {
   e.preventDefault();
   addTaskArray(taskArray);
   displayTaskArray(taskArray);
-  formReset(form);
+  formReset(textForm);
 });
 
 radioForm.addEventListener("click", (e) => {
