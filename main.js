@@ -97,9 +97,11 @@ const displayTaskArray = (taskArray) => {
     tdDelete.appendChild(buttonDelete);
     tr.appendChild(tdDelete);
 
+    // 状態ボタンが押されたときの処理
     buttonStatus.addEventListener("click", () => {
       toggleStatus(task.id);
     });
+    // 削除ボタンが押されたときの処理
     buttonDelete.addEventListener("click", () => {
       deleteTask(task.id);
     });
@@ -115,16 +117,15 @@ const formReset = (textForm) => textForm.reset();
 const filterTask = () => {
   // 選択されているラジオボタンのvalueを取得する
   const selectedRadio = radioForm.status.value;
-  if (selectedRadio === ALL) {
-    displayTaskArray(taskArray);
-  } else {
-    const filterTaskArray = taskArray.filter(
-      (task) => task.status == selectedRadio
-    );
-    displayTaskArray(filterTaskArray);
-  }
+  const filterTaskArray = taskArray.filter(
+    (task) => task.status == selectedRadio
+  );
+  selectedRadio === ALL
+    ? displayTaskArray(taskArray)
+    : displayTaskArray(filterTaskArray);
 };
 
+// 追加ボタンが押されたときの処理
 textForm.addEventListener("submit", (e) => {
   e.preventDefault();
   addTaskArray(taskArray);
@@ -132,6 +133,7 @@ textForm.addEventListener("submit", (e) => {
   formReset(textForm);
 });
 
+// ラジオボタンが押されたときの処理
 radioForm.addEventListener("click", () => {
   filterTask();
 });
