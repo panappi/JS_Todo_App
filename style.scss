@@ -5,7 +5,7 @@ $header__title--font_size: 32px;
 $content__table--border_color: #ececec;
 $content__table--border_solid: solid;
 $content__table--border_weight: 1.2px;
-$content__table-status--border_color: #c0c0c0;
+$content__table-status--border_color: #c6c6c6;
 $content__table-status--border_solid: solid;
 $content__table-status--border_weight: 1.2px;
 $content__table--font_size: 16px;
@@ -41,8 +41,9 @@ body {
     div {
       width: 20px;
       height: 20px;
-      margin: auto;
-      border-color: $content__table-status--border_color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-style: $content__table-status--border_solid;
       border-width: $content__table-status--border_weight;
       border-radius: 50%;
@@ -51,8 +52,12 @@ body {
 }
 .content__table-status {
   width: 30px;
+  min-height: 30px;
   vertical-align: middle;
   border: none;
+  div {
+    border-color: $content__table-status--border_color;
+  }
 }
 .content__table-name {
   border-bottom-color: $content__table--border_color;
@@ -60,9 +65,15 @@ body {
   border-bottom-width: $content__table--border_weight;
 }
 .content__table-delete {
-  width: 50px;
+  width: 30px;
+  min-height: 30px;
   padding-right: 100vw * 0.04;
+  vertical-align: middle;
   border-bottom-color: $content__table--border_color;
   border-bottom-style: $content__table--border_solid;
   border-bottom-width: $content__table--border_weight;
+  div {
+    color: $color_main;
+    border-color: $color_main;
+  }
 }

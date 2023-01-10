@@ -81,6 +81,7 @@ const displayTaskArray = (taskArray) => {
     // const buttonStatus = document.createElement("button");
     const buttonDelete = document.createElement("button");
     const divStatus = document.createElement("div");
+    const divDelete = document.createElement("div");
 
     taskList.appendChild(tr);
     // タスクのID
@@ -97,8 +98,10 @@ const displayTaskArray = (taskArray) => {
     tr.appendChild(tdName);
     tdName.classList.add("content__table-name");
     // 削除ボタン
-    buttonDelete.textContent = REMOVE;
-    tdDelete.appendChild(buttonDelete);
+    // buttonDelete.textContent = REMOVE;
+    // tdDelete.appendChild(buttonDelete);
+    divDelete.textContent = "i";
+    tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
     tdDelete.classList.add("content__table-delete");
 
