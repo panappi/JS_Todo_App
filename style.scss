@@ -1,1 +1,68 @@
 @charset "UTF-8";
+// 共通定義 //
+$color_main: #dca9a0;
+$header__title--font_size: 32px;
+$content__table--border_color: #ececec;
+$content__table--border_solid: solid;
+$content__table--border_weight: 1.2px;
+$content__table-status--border_color: #c0c0c0;
+$content__table-status--border_solid: solid;
+$content__table-status--border_weight: 1.2px;
+$content__table--font_size: 16px;
+
+body {
+  padding: 50px 4% 0;
+  hr {
+    width: 100vw * 0.96;
+    border-color: $content__table--border_color;
+    border-style: $content__table--border_solid;
+    border-width: $content__table--border_weight 0 0 0;
+  }
+}
+
+// ヘッダー　//
+.header__title {
+  color: $color_main;
+  font-size: $header__title--font_size;
+  font-weight: bold;
+}
+
+// コンテンツ //
+.content__table {
+  width: 100vw * 0.96;
+  font-size: $content__table--font_size;
+  // tr {
+  //   border-bottom-color: $content__table--border_color;
+  //   border-bottom-style: $content__table--border_solid;
+  //   border-bottom-width: $content__table--border_weight;
+  // }
+  td {
+    padding: 6px 0;
+    div {
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      border-color: $content__table-status--border_color;
+      border-style: $content__table-status--border_solid;
+      border-width: $content__table-status--border_weight;
+      border-radius: 50%;
+    }
+  }
+}
+.content__table-status {
+  width: 30px;
+  vertical-align: middle;
+  border: none;
+}
+.content__table-name {
+  border-bottom-color: $content__table--border_color;
+  border-bottom-style: $content__table--border_solid;
+  border-bottom-width: $content__table--border_weight;
+}
+.content__table-delete {
+  width: 50px;
+  padding-right: 100vw * 0.04;
+  border-bottom-color: $content__table--border_color;
+  border-bottom-style: $content__table--border_solid;
+  border-bottom-width: $content__table--border_weight;
+}
