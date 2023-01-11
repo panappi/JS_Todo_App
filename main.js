@@ -10,24 +10,24 @@ const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 
 let taskArray = [
-  // {
-  //   id: 0,
-  //   name: "ほげ",
-  //   status: DOING,
-  //   delete: REMOVE,
-  // },
-  // {
-  //   id: 1,
-  //   name: "ほげ",
-  //   status: DOING,
-  //   delete: REMOVE,
-  // },
-  // {
-  //   id: 2,
-  //   name: "ほげ",
-  //   status: DOING,
-  //   delete: REMOVE,
-  // },
+  {
+    id: 0,
+    name: "ほげ",
+    status: DOING,
+    delete: REMOVE,
+  },
+  {
+    id: 1,
+    name: "ほげ",
+    status: DOING,
+    delete: REMOVE,
+  },
+  {
+    id: 2,
+    name: "ほげ",
+    status: DOING,
+    delete: REMOVE,
+  },
 ];
 
 // タスクを配列に追加する
@@ -74,31 +74,42 @@ const displayTaskArray = (taskArray) => {
   taskArray.map((task) => {
     // タスクのDOMを生成
     const tr = document.createElement("tr");
-    const tdId = document.createElement("td");
+    // const tdId = document.createElement("td");
     const tdName = document.createElement("td");
     const tdStatus = document.createElement("td");
     const tdDelete = document.createElement("td");
-    const buttonStatus = document.createElement("button");
+    // const buttonStatus = document.createElement("button");
     const buttonDelete = document.createElement("button");
+    const divStatus = document.createElement("div");
+    const divDelete = document.createElement("div");
 
     taskList.appendChild(tr);
     // タスクのID
-    tdId.textContent = task.id;
-    tr.appendChild(tdId);
+    // tdId.textContent = task.id;
+    // tr.appendChild(tdId);
+    // 状態ボタン
+    // buttonStatus.textContent = task.status;
+    // tdStatus.appendChild(buttonStatus);
+    tdStatus.appendChild(divStatus);
+    tr.appendChild(tdStatus);
+    tdStatus.classList.add("content__table-status");
+    divStatus.classList.add("contents__task-status");
     // タスクの名前
     tdName.textContent = task.name;
     tr.appendChild(tdName);
-    // 状態ボタン
-    buttonStatus.textContent = task.status;
-    tdStatus.appendChild(buttonStatus);
-    tr.appendChild(tdStatus);
+    tdName.classList.add("content__table-name");
     // 削除ボタン
-    buttonDelete.textContent = REMOVE;
-    tdDelete.appendChild(buttonDelete);
+    // buttonDelete.textContent = REMOVE;
+    // tdDelete.appendChild(buttonDelete);
+    divDelete.textContent = "i";
+    tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
+    tdDelete.classList.add("content__table-delete");
+    divDelete.classList.add("contents__task-status");
 
     // 状態ボタンが押されたときの処理
-    buttonStatus.addEventListener("click", () => {
+    // buttonStatus.addEventListener("click", () => {
+    divStatus.addEventListener("click", () => {
       toggleStatus(task.id);
     });
     // 削除ボタンが押されたときの処理
