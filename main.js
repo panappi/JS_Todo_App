@@ -72,32 +72,53 @@ const displayTaskArray = (taskArray) => {
   taskList.innerHTML = ""; // tbodyを初期化
 
   taskArray.map((task) => {
-    // タスクのDOMを生成
+    // タスクのDOMを生成する
     const tr = document.createElement("tr");
     // const tdId = document.createElement("td");
     const tdName = document.createElement("td");
     const tdStatus = document.createElement("td");
     const tdDelete = document.createElement("td");
     // const buttonStatus = document.createElement("button");
-    const buttonDelete = document.createElement("button");
-    const divStatus = document.createElement("div");
+    // const buttonDelete = document.createElement("button");
+    const divStatusOut = document.createElement("div");
+    const divStatusIn = document.createElement("div");
     const divDelete = document.createElement("div");
+
+    // タスクの状態に合わせてdivタグへclassを追加する
+    const toggleStatusClass = (task) => {
+      task.status === DOING
+        ? (divStatusOut.classList.remove(
+            "contents__table-status-div--done_out"
+          ),
+          divStatusIn.classList.remove("contents__table-status-div--done_in"),
+          divStatusOut.classList.add("contents__table-status-div--doing"),
+          tdName.classList.remove("content__table-name--done"))
+        : (divStatusOut.classList.remove("contents__table-status-div--doing"),
+          divStatusOut.classList.add("contents__table-status-div--done_out"),
+          divStatusIn.classList.add("contents__table-status-div--done_in"),
+          tdName.classList.add("content__table-name--done"));
+    };
 
     taskList.appendChild(tr);
     // タスクのID
     // tdId.textContent = task.id;
     // tr.appendChild(tdId);
+
     // 状態ボタン
     // buttonStatus.textContent = task.status;
     // tdStatus.appendChild(buttonStatus);
-    tdStatus.appendChild(divStatus);
+    tdStatus.appendChild(divStatusOut);
+    divStatusOut.appendChild(divStatusIn);
     tr.appendChild(tdStatus);
     tdStatus.classList.add("content__table-status");
-    divStatus.classList.add("contents__task-status");
+    // divStatusOut.classList.add("contents__table-status-div--doing");
+    toggleStatusClass(task);
+
     // タスクの名前
     tdName.textContent = task.name;
     tr.appendChild(tdName);
     tdName.classList.add("content__table-name");
+
     // 削除ボタン
     // buttonDelete.textContent = REMOVE;
     // tdDelete.appendChild(buttonDelete);
@@ -105,15 +126,16 @@ const displayTaskArray = (taskArray) => {
     tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
     tdDelete.classList.add("content__table-delete");
-    divDelete.classList.add("contents__task-status");
+    divDelete.classList.add("contents__table-delete-div");
 
     // 状態ボタンが押されたときの処理
     // buttonStatus.addEventListener("click", () => {
-    divStatus.addEventListener("click", () => {
+    divStatusOut.addEventListener("click", () => {
       toggleStatus(task.id);
     });
     // 削除ボタンが押されたときの処理
-    buttonDelete.addEventListener("click", () => {
+    // buttonDelete.addEventListener("click", () => {
+    divDelete.addEventListener("click", () => {
       deleteTask(task.id);
     });
   });
