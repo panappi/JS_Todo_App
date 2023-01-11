@@ -2,12 +2,13 @@
 // 共通定義 //
 $color_main: #dca9a0;
 $header__title--font_size: 32px;
+$content__table-name--done_font_color: #c6c6c6;
 $content__table--border_color: #ececec;
 $content__table--border_solid: solid;
 $content__table--border_weight: 1.2px;
-$content__table-status--border_color: #c6c6c6;
-$content__table-status--border_solid: solid;
-$content__table-status--border_weight: 1.2px;
+$content__table-div--border_color: #c6c6c6;
+$content__table-div--border_solid: solid;
+$content__table-div--border_weight: 1.2px;
 $content__table--font_size: 16px;
 
 body {
@@ -28,6 +29,10 @@ body {
 }
 
 // コンテンツ //
+#textForm {
+  display: flex;
+  justify-content: left;
+}
 .content__table {
   width: 100vw * 0.96;
   font-size: $content__table--font_size;
@@ -40,20 +45,57 @@ body {
     padding: 6px 0;
   }
 }
+// 状態ボタン用のtd
 .content__table-status {
   width: 30px;
   min-height: 30px;
   vertical-align: middle;
   border: none;
-  div {
-    border-color: $content__table-status--border_color;
-  }
 }
+// 状態ボタン用のdiv(作業中)
+.contents__table-status-div--doing {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: $content__table-div--border_color;
+  border-style: $content__table-div--border_solid;
+  border-width: $content__table-div--border_weight;
+  border-radius: 50%;
+}
+// 状態ボタン用のdiv(完了:外側)
+.contents__table-status-div--done_out {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: $color_main;
+  border-style: $content__table-div--border_solid;
+  border-width: $content__table-div--border_weight;
+  border-radius: 50%;
+}
+// 状態ボタン用のdiv(完了:内側)
+.contents__table-status-div--done_in {
+  width: 12px;
+  height: 12px;
+  border-color: $color_main;
+  border-style: $content__table-div--border_solid;
+  border-width: $content__table-div--border_weight;
+  background-color: $color_main;
+  border-radius: 50%;
+}
+// タスクの名前用のtd
 .content__table-name {
   border-bottom-color: $content__table--border_color;
   border-bottom-style: $content__table--border_solid;
   border-bottom-width: $content__table--border_weight;
 }
+.content__table-name--done {
+  color: $content__table-name--done_font_color;
+}
+// 削除ボタン用のtd
 .content__table-delete {
   width: 30px;
   min-height: 30px;
@@ -62,22 +104,17 @@ body {
   border-bottom-color: $content__table--border_color;
   border-bottom-style: $content__table--border_solid;
   border-bottom-width: $content__table--border_weight;
-  div {
-    color: $color_main;
-    border-color: $color_main;
-  }
 }
-.contents__task-status {
+// 削除ボタン用のdiv
+.contents__table-delete-div {
   width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-style: $content__table-status--border_solid;
-  border-width: $content__table-status--border_weight;
+  color: $color_main;
+  border-color: $color_main;
+  border-style: $content__table-div--border_solid;
+  border-width: $content__table-div--border_weight;
   border-radius: 50%;
-}
-#textForm {
-  display: flex;
-  justify-content: left;
 }
