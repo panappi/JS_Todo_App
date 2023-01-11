@@ -93,6 +93,7 @@ const displayTaskArray = (taskArray) => {
     tdStatus.appendChild(divStatus);
     tr.appendChild(tdStatus);
     tdStatus.classList.add("content__table-status");
+    divStatus.classList.add("contents__task-status");
     // タスクの名前
     tdName.textContent = task.name;
     tr.appendChild(tdName);
@@ -104,6 +105,7 @@ const displayTaskArray = (taskArray) => {
     tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
     tdDelete.classList.add("content__table-delete");
+    divDelete.classList.add("contents__task-status");
 
     // 状態ボタンが押されたときの処理
     // buttonStatus.addEventListener("click", () => {

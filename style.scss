@@ -38,16 +38,6 @@ body {
   // }
   td {
     padding: 6px 0;
-    div {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-style: $content__table-status--border_solid;
-      border-width: $content__table-status--border_weight;
-      border-radius: 50%;
-    }
   }
 }
 .content__table-status {
@@ -76,4 +66,18 @@ body {
     color: $color_main;
     border-color: $color_main;
   }
+}
+.contents__task-status {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: $content__table-status--border_solid;
+  border-width: $content__table-status--border_weight;
+  border-radius: 50%;
+}
+#textForm {
+  display: flex;
+  justify-content: left;
 }
