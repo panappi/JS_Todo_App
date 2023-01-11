@@ -83,6 +83,7 @@ const displayTaskArray = (taskArray) => {
     const divStatusOut = document.createElement("div");
     const divStatusIn = document.createElement("div");
     const divDelete = document.createElement("div");
+    const iDelete = document.createElement("i");
 
     // タスクの状態に合わせてdivタグへclassを追加する
     const toggleStatusClass = (task) => {
@@ -122,11 +123,13 @@ const displayTaskArray = (taskArray) => {
     // 削除ボタン
     // buttonDelete.textContent = REMOVE;
     // tdDelete.appendChild(buttonDelete);
-    divDelete.textContent = "i";
+    // divDelete.textContent = "i";
+    divDelete.appendChild(iDelete);
     tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
     tdDelete.classList.add("content__table-delete");
     divDelete.classList.add("contents__table-delete-div");
+    iDelete.classList.add("ai-trash-can");
 
     // 状態ボタンが押されたときの処理
     // buttonStatus.addEventListener("click", () => {
