@@ -13,6 +13,11 @@ $content__table--font_size: 16px;
 
 body {
   padding: 50px 4% 0;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
   hr {
     width: 100vw * 0.96;
     border-color: $content__table--border_color;
@@ -27,12 +32,19 @@ body {
   font-size: $header__title--font_size;
   font-weight: bold;
 }
+.header__button {
+  padding-bottom: 4px;
+  color: $color_main;
+  font-size: 12px;
+}
 
 // コンテンツ //
-#textForm {
-  width: 100vw * 0.96;
-  display: flex;
-  justify-content: left;
+section {
+  form {
+    width: 100vw * 0.96;
+    display: flex;
+    justify-content: left;
+  }
 }
 .content__table {
   width: 100vw * 0.96;

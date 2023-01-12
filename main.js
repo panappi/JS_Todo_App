@@ -2,8 +2,11 @@ const ALL = "すべて";
 const DOING = "作業中";
 const DONE = "完了";
 const REMOVE = "削除";
+const DISPLAY = "表示";
+const HIDE = "非表示";
 
-const radioForm = document.getElementById("radioForm");
+// const radioForm = document.getElementById("radioForm");
+const filterButton = document.getElementById("filterButton");
 const textForm = document.getElementById("textForm");
 const text = document.getElementById("text"); // 入力されたテキスト
 const addButton = document.getElementById("addButton");
@@ -144,22 +147,30 @@ const displayTaskArray = (taskArray) => {
   });
 };
 
-displayTaskArray(taskArray);
-
 // タスク入力フォームのテキストをリセットする
 const formReset = (textForm) => textForm.reset();
 
 // ラジオボタンに合わせてタスクの表示を変更する
 const filterTask = () => {
   // 選択されているラジオボタンのvalueを取得する
-  const selectedRadio = radioForm.status.value;
+  // const selectedRadio = radioForm.status.value;
   const filterTaskArray = taskArray.filter(
-    (task) => task.status == selectedRadio
+    // (task) => task.status == selectedRadio
+    (task) => task.status == DOING
   );
-  selectedRadio === ALL
+  // selectedRadio === ALL
+  filterButton.textContent === HIDE
     ? displayTaskArray(taskArray)
     : displayTaskArray(filterTaskArray);
 };
+
+const toggleFilterButton = (filter) => {
+  filter.textContent === HIDE
+    ? (filter.textContent = DISPLAY)
+    : (filter.textContent = HIDE);
+};
+
+displayTaskArray(taskArray);
 
 // 追加ボタンが押されたときの処理
 textForm.addEventListener("submit", (e) => {
@@ -170,6 +181,8 @@ textForm.addEventListener("submit", (e) => {
 });
 
 // ラジオボタンが押されたときの処理
-radioForm.addEventListener("click", () => {
+// radioForm.addEventListener("click", () => {
+filterButton.addEventListener("click", () => {
+  toggleFilterButton(filterButton);
   filterTask();
 });
