@@ -7,6 +7,7 @@
     <title>JS Todo App</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/reset.css" />
+    <script src="https://unpkg.com/akar-icons-fonts"></script>
   </head>
   <body>
     <header>
@@ -42,13 +43,15 @@
           <!-- タスク追加フォーム -->
           <tr>
             <td class="content__table-status">
-              <div class="contents__table-status-div--done_out">
-                <div class="contents__table-status-div--done_in"></div>
+              <div class="contents__table-status-div--doing">
+                <div></div>
               </div>
             </td>
             <td class="content__table-name" colspan="2">
               <input id="text" type="text" placeholder="テキストを入力" />
-              <button id="addButton" type="submit">追加</button>
+              <button id="addButton" type="submit">
+                <i class="ai-plus"></i>
+              </button>
             </td>
           </tr>
         </table>

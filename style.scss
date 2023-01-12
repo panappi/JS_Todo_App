@@ -30,6 +30,7 @@ body {
 
 // コンテンツ //
 #textForm {
+  width: 100vw * 0.96;
   display: flex;
   justify-content: left;
 }
@@ -92,6 +93,7 @@ body {
   border-bottom-style: $content__table--border_solid;
   border-bottom-width: $content__table--border_weight;
 }
+// 完了タスクのフォントカラー変更用
 .content__table-name--done {
   color: $content__table-name--done_font_color;
 }
@@ -99,7 +101,6 @@ body {
 .content__table-delete {
   width: 30px;
   min-height: 30px;
-  padding-right: 100vw * 0.04;
   vertical-align: middle;
   border-bottom-color: $content__table--border_color;
   border-bottom-style: $content__table--border_solid;
@@ -107,6 +108,7 @@ body {
 }
 // 削除ボタン用のdiv
 .contents__table-delete-div {
+  margin-right: 100vw * 0.04;
   width: 20px;
   height: 20px;
   display: flex;
@@ -117,4 +119,12 @@ body {
   border-style: $content__table-div--border_solid;
   border-width: $content__table-div--border_weight;
   border-radius: 50%;
+}
+// 削除ボタンのアイコン
+.ai-trash-can {
+  font-size: 14px;
+}
+// タスク追加ボタンのアイコン
+.ai-plus {
+  color: $color_main;
 }
