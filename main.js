@@ -79,6 +79,14 @@ const deleteTask = (id) => {
   displayTaskArray(taskArray);
 };
 
+const doneTaskDisplay = () => {
+  // 完了タスクを数えてhtmlに表示する
+  doneTaskCount.textContent =
+    "実行済み (" +
+    taskArray.filter((task) => task.status == DONE).length +
+    "件) ";
+};
+
 // タスクをhtmlに表示する(tbodyに追加する)
 const displayTaskArray = (taskArray) => {
   taskList.innerHTML = ""; // tbodyを初期化
@@ -88,11 +96,7 @@ const displayTaskArray = (taskArray) => {
     (task) => task.status == DOING
   ).length;
 
-  // 完了タスクを数えてhtmlに表示する
-  doneTaskCount.textContent =
-    "実行済み (" +
-    taskArray.filter((task) => task.status == DONE).length +
-    "件) ";
+  doneTaskDisplay();
 
   taskArray.map((task) => {
     // タスクのDOMを生成する
