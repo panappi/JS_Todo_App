@@ -43,7 +43,7 @@ const addTaskArray = (taskArray) => {
   });
 };
 
-// タスクの状態をトグルで入れ替える
+// タスクの状態をトグルさせる
 const toggleStatus = (id) => {
   taskArray = taskArray.map((task) => {
     if (task.id === id) {
@@ -56,6 +56,16 @@ const toggleStatus = (id) => {
   });
   displayTaskArray(taskArray);
 };
+
+// フィルターボタンの表示/非表示をトグルさせる
+// const displayFilterButton = () => {
+//   taskArray = taskArray.map((task) => {
+//     task.status === DONE
+//       ? (filterButton.style.display = "none")
+//       : (filterButton.style.display = "contents");
+//     return task;
+//   });
+// };
 
 // タスクを配列から削除する
 const deleteTask = (id) => {
@@ -150,7 +160,25 @@ const displayTaskArray = (taskArray) => {
 // タスク入力フォームのテキストをリセットする
 const formReset = (textForm) => textForm.reset();
 
-// ラジオボタンに合わせてタスクの表示を変更する
+// DONEのタスクがあるか確認する
+let answer = DOING;
+const checkTaskStatus = () => {
+  taskArray = taskArray.map((task) => {
+    if (task.status === DONE) answer = DONE;
+    return task;
+  });
+};
+
+// フィルターボタンをトグルさせる
+const toggleFilterButtonText = (filter) => {
+  if (answer === DONE) {
+    filter.textContent === HIDE
+      ? (filter.textContent = DISPLAY)
+      : (filter.textContent = HIDE);
+  }
+};
+
+// フィルターボタンに合わせてタスクの表示を変更する
 const filterTask = () => {
   // 選択されているラジオボタンのvalueを取得する
   // const selectedRadio = radioForm.status.value;
@@ -162,12 +190,6 @@ const filterTask = () => {
   filterButton.textContent === HIDE
     ? displayTaskArray(taskArray)
     : displayTaskArray(filterTaskArray);
-};
-
-const toggleFilterButton = (filter) => {
-  filter.textContent === HIDE
-    ? (filter.textContent = DISPLAY)
-    : (filter.textContent = HIDE);
 };
 
 displayTaskArray(taskArray);
@@ -183,6 +205,7 @@ textForm.addEventListener("submit", (e) => {
 // ラジオボタンが押されたときの処理
 // radioForm.addEventListener("click", () => {
 filterButton.addEventListener("click", () => {
-  toggleFilterButton(filterButton);
+  checkTaskStatus();
+  toggleFilterButtonText(filterButton);
   filterTask();
 });
