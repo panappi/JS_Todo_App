@@ -22,34 +22,35 @@
         <input id="done" type="radio" name="status" value="完了" />
         <label for="done">完了</label>
       </form> -->
-      <!-- <div id="filterButton" class="header__button" style="display: none"> -->
-      <div id="filterButton" class="header__button">非表示</div>
+      <div id="doingTaskCount" class="header__count-doing"></div>
     </header>
 
-    <hr />
-
     <section>
+      <div class="contents__menu">
+        <div id="doneTaskCount" class="contents__count-done"></div>
+        <div id="filterButton" class="contents__button">非表示</div>
+      </div>
       <form id="textForm">
-        <table class="content__table">
-          <!-- <thead>
-          <tr>
-            <th class="content__table-status"></th>
-            <th class="content__table-name"></th>
-            <th class="content__table-delete"></th>
-          </tr>
-        </thead> -->
+        <table class="contents__table">
+          <thead>
+            <tr>
+              <!-- <th class="contents__table-status"></th>
+            <th class="contents__table-name"></th>
+            <th class="contents__table-delete"></th> -->
+            </tr>
+          </thead>
 
           <!-- タスクが追加される場所 -->
           <tbody id="taskList"></tbody>
 
           <!-- タスク追加フォーム -->
           <tr>
-            <td class="content__table-status">
+            <td class="contents__table-status">
               <div class="contents__table-status-div--doing">
                 <div></div>
               </div>
             </td>
-            <td class="content__table-name" colspan="2">
+            <td class="contents__table-name" colspan="2">
               <input id="text" type="text" placeholder="テキストを入力" />
               <button id="addButton" type="submit">
                 <i class="ai-plus"></i>

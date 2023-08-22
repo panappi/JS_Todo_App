@@ -5,6 +5,8 @@ const REMOVE = "削除";
 const DISPLAY = "表示";
 const HIDE = "非表示";
 
+const doingTaskCount = document.getElementById("doingTaskCount");
+const doneTaskCount = document.getElementById("doneTaskCount");
 // const radioForm = document.getElementById("radioForm");
 const filterButton = document.getElementById("filterButton");
 const textForm = document.getElementById("textForm");
@@ -59,12 +61,9 @@ const toggleStatus = (id) => {
 
 // フィルターボタンの表示/非表示をトグルさせる
 // const displayFilterButton = () => {
-//   taskArray = taskArray.map((task) => {
-//     task.status === DONE
-//       ? (filterButton.style.display = "none")
-//       : (filterButton.style.display = "contents");
-//     return task;
-//   });
+//   answer === DONE
+//     ? (filterButton.style.display = "none")
+//     : (filterButton.style.display = "contents");
 // };
 
 // タスクを配列から削除する
@@ -80,9 +79,24 @@ const deleteTask = (id) => {
   displayTaskArray(taskArray);
 };
 
+const doneTaskDisplay = () => {
+  // 完了タスクを数えてhtmlに表示する
+  doneTaskCount.textContent =
+    "実行済み (" +
+    taskArray.filter((task) => task.status == DONE).length +
+    "件) ";
+};
+
 // タスクをhtmlに表示する(tbodyに追加する)
 const displayTaskArray = (taskArray) => {
   taskList.innerHTML = ""; // tbodyを初期化
+
+  // 作業中タスクを数えてhtmlに表示する
+  doingTaskCount.textContent = taskArray.filter(
+    (task) => task.status == DOING
+  ).length;
+
+  doneTaskDisplay();
 
   taskArray.map((task) => {
     // タスクのDOMを生成する
@@ -106,11 +120,11 @@ const displayTaskArray = (taskArray) => {
           ),
           divStatusIn.classList.remove("contents__table-status-div--done_in"),
           divStatusOut.classList.add("contents__table-status-div--doing"),
-          tdName.classList.remove("content__table-name--done"))
+          tdName.classList.remove("contents__table-name--done"))
         : (divStatusOut.classList.remove("contents__table-status-div--doing"),
           divStatusOut.classList.add("contents__table-status-div--done_out"),
           divStatusIn.classList.add("contents__table-status-div--done_in"),
-          tdName.classList.add("content__table-name--done"));
+          tdName.classList.add("contents__table-name--done"));
     };
 
     taskList.appendChild(tr);
@@ -124,14 +138,14 @@ const displayTaskArray = (taskArray) => {
     tdStatus.appendChild(divStatusOut);
     divStatusOut.appendChild(divStatusIn);
     tr.appendChild(tdStatus);
-    tdStatus.classList.add("content__table-status");
+    tdStatus.classList.add("contents__table-status");
     // divStatusOut.classList.add("contents__table-status-div--doing");
     toggleStatusClass(task);
 
     // タスクの名前
     tdName.textContent = task.name;
     tr.appendChild(tdName);
-    tdName.classList.add("content__table-name");
+    tdName.classList.add("contents__table-name");
 
     // 削除ボタン
     // buttonDelete.textContent = REMOVE;
@@ -140,7 +154,7 @@ const displayTaskArray = (taskArray) => {
     divDelete.appendChild(iDelete);
     tdDelete.appendChild(divDelete);
     tr.appendChild(tdDelete);
-    tdDelete.classList.add("content__table-delete");
+    tdDelete.classList.add("contents__table-delete");
     divDelete.classList.add("contents__table-delete-div");
     iDelete.classList.add("ai-trash-can");
 
